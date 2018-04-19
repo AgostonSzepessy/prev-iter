@@ -28,6 +28,47 @@ impl<I> PrevPeekable<I> where
             current: current,
         }
     }
+
+    /// Returns a reference to the `next()` value without advancing the iterator.
+    ///
+    /// Like [`next`], if there is a value, it is wrapped in a `Some(T)`.
+    /// But if the iteration is over, `None` is returned.
+    ///
+    /// [`next`]: trait.Iterator.html#tymethod.next
+    ///
+    /// Because `peek()` returns a reference, and many iterators iterate over
+    /// references, there can be a possibly confusing situation where the
+    /// return value is a double reference. You can see this effect in the
+    /// examples below.
+    ///
+    /// # Examples
+    ///
+    /// Basic usage:
+    ///
+    /// ```
+    /// let xs = [1, 2, 3];
+    ///
+    /// let mut iter = xs.iter().peekable();
+    ///
+    /// // peek() lets us see into the future
+    /// assert_eq!(iter.peek(), Some(&&1));
+    /// assert_eq!(iter.next(), Some(&1));
+    ///
+    /// assert_eq!(iter.next(), Some(&2));
+    ///
+    /// // The iterator does not advance even if we `peek` multiple times
+    /// assert_eq!(iter.peek(), Some(&&3));
+    /// assert_eq!(iter.peek(), Some(&&3));
+    ///
+    /// assert_eq!(iter.next(), Some(&3));
+    ///
+    /// // After the iterator is finished, so is `peek()`
+    /// assert_eq!(iter.peek(), None);
+    /// assert_eq!(iter.next(), None);
+    /// ```
+    pub fn peek(&mut self) -> Option<&I::Item> {
+        self.current.as_ref()
+    }
 }
 
 impl<I> Iterator for PrevPeekable<I> where 
@@ -65,6 +106,18 @@ mod tests {
         assert_eq!(Some(&3), iter.next());
         assert_eq!(Some(&3), iter.prev);
         assert_eq!(None, iter.next());
+        assert_eq!(None, iter.next());
+    }
+
+    #[test]
+    fn test_peek() {
+        let v = vec![1, 2];
+        let mut iter = PrevPeekable::new(v.iter());
+
+        assert_eq!(Some(&&1), iter.peek());
+        assert_eq!(Some(&1), iter.next());
+        assert_eq!(Some(&&2), iter.peek());
+        assert_eq!(Some(&2), iter.next());
         assert_eq!(None, iter.next());
     }
 }
