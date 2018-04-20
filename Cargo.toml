@@ -1,8 +1,14 @@
 [package]
 name = "prev-iter"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["Agoston Szepessy <agszepp@gmail.com>"]
 description = "Iterator which allows you to view the previous element"
 license = "MPL-2.0"
+readme = "README.md"
+repository = "https://github.com/AgostonSzepessy/prev-iter"
+homepage = "https://github.com/AgostonSzepessy/prev-iter"
+
+[badges]
+travis-ci = { repository = "AgostonSzepessy/prev-iter" }
 
 [dependencies]
