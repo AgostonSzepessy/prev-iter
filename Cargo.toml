@@ -2,5 +2,7 @@
 name = "prev-iter"
 version = "0.1.0"
 authors = ["Agoston Szepessy <agszepp@gmail.com>"]
+description = "Iterator which allows you to view the previous element"
+license = "MPL-2.0"
 
 [dependencies]
