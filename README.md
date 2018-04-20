@@ -5,7 +5,7 @@ prev-iter contains an iterator which allows you to view the previous element.
 ## Usage
 Add the following line to your `Cargo.toml` under the `[dependencies]` section:
 ```
-prev-iter = "0.1.1"
+prev-iter = "0.1.2"
 ```
 
 ## Documentation
