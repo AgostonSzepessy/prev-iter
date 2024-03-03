@@ -185,7 +185,7 @@ where
     fn next(&mut self) -> Option<I::Item> {
         // If self.iterator.peek() is None, we've reached the end, and self.prev should
         // the second last element
-        if let Some(_) = self.iterator.peek() {
+        if self.iterator.peek().is_some() {
             self.prev = std::mem::replace(&mut self.current, self.iterator.next());
             return self.current.clone();
         } else if !self.finished {
