@@ -1,4 +1,4 @@
-# prev-iter [![Build Status](https://travis-ci.org/AgostonSzepessy/prev-iter.svg?branch=master)](https://travis-ci.org/AgostonSzepessy/prev-iter)
+# prev-iter ![Test badge](https://github.com/AgostonSzepessy/prev-iter/actions/workflows/test.yml/badge.svg)
 
 prev-iter contains an iterator which allows you to view the previous element.
 

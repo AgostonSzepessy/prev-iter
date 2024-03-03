@@ -9,7 +9,4 @@ readme = "README.md"
 repository = "https://github.com/AgostonSzepessy/prev-iter"
 homepage = "https://github.com/AgostonSzepessy/prev-iter"
 
-[badges]
-travis-ci = { repository = "AgostonSzepessy/prev-iter" }
-
 [dependencies]
