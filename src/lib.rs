@@ -1,7 +1,7 @@
 //! `prev-iter` contains an iterator which allows you to view the previous element.
 
-use std::iter::Peekable;
 use std::iter::Iterator;
+use std::iter::Peekable;
 
 /// An iterator with `prev()`, `prev_peek()`, and `peek()` functions that return the previous element, a
 /// reference to the previous element, or a reference to the next element, respectively.
@@ -12,9 +12,11 @@ use std::iter::Iterator;
 /// [`Iterator`]: https://doc.rust-lang.org/nightly/core/iter/iterator/trait.Iterator.html
 /// [`Clone`]: https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html
 /// [`new`]: struct.PrevPeekable.html#method.new
-pub struct PrevPeekable<I> where 
-    I: Iterator, 
-    <I as ::std::iter::Iterator>::Item: ::std::clone::Clone, {
+pub struct PrevPeekable<I>
+where
+    I: Iterator,
+    <I as ::std::iter::Iterator>::Item: ::std::clone::Clone,
+{
     /// Iterator that `PrevPeekable` wraps
     iterator: Peekable<I>,
     /// The element before the one we just returned. Initially it's `None`.
@@ -25,10 +27,11 @@ pub struct PrevPeekable<I> where
     finished: bool,
 }
 
-impl<I> PrevPeekable<I> where
+impl<I> PrevPeekable<I>
+where
     I: Iterator,
-    <I as ::std::iter::Iterator>::Item: ::std::clone::Clone, {
-
+    <I as ::std::iter::Iterator>::Item: ::std::clone::Clone,
+{
     /// Creates a new `PrevPeekable`. It takes an [`Iterator`] whose `Item` implements [`Clone`].
     ///
     /// [`Iterator`]: https://doc.rust-lang.org/nightly/core/iter/iterator/trait.Iterator.html
@@ -154,7 +157,7 @@ impl<I> PrevPeekable<I> where
     /// // Initially there is nothing to peek at
     /// assert_eq!(None, it.prev_peek());
     /// assert_eq!(Some(&1), it.next());
-    /// 
+    ///
     /// // There is nothing before the first element
     /// assert_eq!(None, it.prev_peek());
     /// assert_eq!(Some(&2), it.next());
@@ -171,10 +174,11 @@ impl<I> PrevPeekable<I> where
     }
 }
 
-impl<I> Iterator for PrevPeekable<I> where 
+impl<I> Iterator for PrevPeekable<I>
+where
     I: Iterator,
-    <I as ::std::iter::Iterator>::Item: ::std::clone::Clone, {
-
+    <I as ::std::iter::Iterator>::Item: ::std::clone::Clone,
+{
     type Item = I::Item;
 
     fn next(&mut self) -> Option<I::Item> {
@@ -258,7 +262,7 @@ mod tests {
         assert_eq!(Some(&&1), it.prev_peek());
         assert_eq!(None, it.next());
         assert_eq!(Some(&&2), it.prev_peek());
-        
+
         assert_eq!(None, it.next());
         assert_eq!(Some(&&2), it.prev_peek());
     }
